@@ -48,7 +48,7 @@ context "with spares" do
   end
 end
 
-context "bonus balls" do
+context "with bonus balls" do
 
   it 'can return the score if the 10th frame is a strike' do
     18.times {game.roll(1)}
@@ -57,10 +57,20 @@ context "bonus balls" do
     expect(game.overall_score).to eq 30
   end
 
+  it 'can return the score if the 10th frame is a spare' do
+    18.times {game.roll(1)}
+    2.times {game.roll(5)}
+    game.roll(1)
+    expect(game.overall_score).to eq 29
+  end
+
+context "perfect game" do
+
   it 'can return the score of a perfect game' do
     12.times {game.roll(10)}
     expect(game.overall_score).to eq 300
   end    
+end
 end
 
 end
